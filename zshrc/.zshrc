@@ -116,8 +116,12 @@ source $ZSH/oh-my-zsh.sh
 
 # Add custom scripts
 export PATH="$PATH:$HOME/.config/shell/scripts"
-
 export PATH="$PATH:$HOME/.npm-global/bin"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # Add custom aliases
 source ~/.config/shell/aliases/aliases.sh
