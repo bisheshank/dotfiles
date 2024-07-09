@@ -30,6 +30,7 @@ require('plugins.telescope')
 require('plugins.treesitter')
 require('plugins.lualine')
 require('plugins.toggleterm')
+require('plugins.vimtex')
 
 if is_bootstrap then
   require('packer').sync()

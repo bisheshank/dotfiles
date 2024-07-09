@@ -117,5 +117,7 @@ source $ZSH/oh-my-zsh.sh
 # Add custom scripts
 export PATH="$PATH:$HOME/.config/shell/scripts"
 
+export PATH="$PATH:$HOME/.npm-global/bin"
+
 # Add custom aliases
 source ~/.config/shell/aliases/aliases.sh
