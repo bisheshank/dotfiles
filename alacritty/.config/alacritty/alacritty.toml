@@ -1,5 +1,10 @@
 # Configuration for Alacritty
 
 [font]
-size = 14.0
+size = 22.0
 
+[window]
+decorations = "Buttonless"
+[window.padding]
+x = 10
+y = 10
