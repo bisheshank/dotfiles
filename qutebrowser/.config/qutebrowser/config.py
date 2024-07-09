@@ -1143,7 +1143,7 @@ c.completion.open_categories = ['searchengines', 'quickmarks', 'bookmarks', 'his
 
 ## Enable WebGL.
 ## Type: Bool
-# c.content.webgl = True
+c.content.webgl = False
 
 ## Which interfaces to expose via WebRTC.
 ## Type: String

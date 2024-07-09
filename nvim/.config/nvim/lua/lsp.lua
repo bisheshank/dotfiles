@@ -56,6 +56,7 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+-- Other language servers
 require('lspconfig').dolmenls.setup{}
 require('lspconfig').racket_langserver.setup{
   capabilities = capabilities,
