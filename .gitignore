@@ -1,0 +1,13 @@
+# Ignore compiled Lua files in the Neovim configuration
+nvim/.config/nvim/plugin/packer_compiled.lua
+
+# Ignore any other files or directories you want to exclude
+# nvim/.config/nvim/swap/
+# nvim/.config/nvim/backup/
+# nvim/.config/nvim/undo/
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore Vim swap files
+*.swp
