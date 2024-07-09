@@ -2180,7 +2180,7 @@ c.url.start_pages = ['https://calendar.google.com/calendar/u/0/r/week']
 
 ## Default zoom level.
 ## Type: Perc
-# c.zoom.default = '100%'
+c.zoom.default = '120%'
 
 ## Available zoom levels.
 ## Type: List of Perc
