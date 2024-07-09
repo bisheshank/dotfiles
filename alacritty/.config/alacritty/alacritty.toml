@@ -1,7 +1,7 @@
 # Configuration for Alacritty
 
 [font]
-size = 22.0
+size = 20.0
 
 [window]
 decorations = "Buttonless"

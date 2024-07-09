@@ -1,0 +1,36 @@
+# Reapply the scripting addition when the dock restarts
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# Set default layout (can be bsp, stack, or float)
+yabai -m config layout bsp
+
+# Set padding and window gap
+yabai -m config top_padding 10
+yabai -m config bottom_padding 10
+yabai -m config left_padding 10
+yabai -m config right_padding 10
+yabai -m config window_gap 10
+
+# Center mouse on window with focus
+yabai -m config mouse_follows_focus on
+
+# When window is dropped in the center of another window, swap them
+yabai -m mouse_drop_action swap
+
+# Ensure a specific number of spaces exist
+NSPACES=7
+SPACES_TO_CREATE=$(yabai -m query --displays | jq ".[0].spaces | $NSPACES - length | if . < 1 then 0 else . end")
+
+i=0
+while [ "$i" -lt "$SPACES_TO_CREATE" ]; do
+    yabai -m space --create
+    i=$((i + 1))
+done
+
+# Rules for specific applications (uncomment if needed)
+# yabai -m rule --add app="^System Settings$" manage=off
+# yabai -m rule --add app="^Calculator$" manage=off
+# yabai -m rule --add app="^iTerm2$" manage=off
+# yabai -m rule --add app="^Karabiner-Elements$" manage=off
+
