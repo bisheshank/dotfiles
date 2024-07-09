@@ -9,14 +9,20 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+  return
+end
+
+-- Load plugins
+require('plugins')
+
 -- Load settings
 require('settings')
 
 -- Load keymaps
 require('keymaps')
-
--- Load plugins
-require('plugins')
 
 -- Load LSP configurations
 require('lsp')
