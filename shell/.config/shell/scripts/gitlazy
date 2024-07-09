@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+if [ $# -eq 0 ]; then
+    cat <<EOF
+    usage:  gitlazy [log message]
+
+    This script pulls the latest source, adds all files, commits, and pushes
+    back to the current branch. You can run as per the example below:
+
+        $ gitlazy "updated modules for user management"
+        $ On branch master
+        $ Your branch is up to date with 'origin/master'.
+        $ Everything up-to-date
+
+EOF
+    exit 1
+fi
+
+# Pull the latest changes from the remote repository
+echo "Pulling latest changes from the remote repository..."
+git pull origin $(git rev-parse --abbrev-ref HEAD)
+
+# Add all changes
+echo "Adding all changes..."
+git add -A
+
+# Commit changes with the provided message
+echo "Committing changes..."
+git commit -m "$*"
+
+# Push changes to the remote repository
+echo "Pushing changes to the remote repository..."
+git push origin $(git rev-parse --abbrev-ref HEAD)
+
+echo "All done!"
+

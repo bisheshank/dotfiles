@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# Path to the log file and PID file
+LOG_FILE="$HOME/vpn/openvpn.log"
+PID_FILE="$HOME/vpn/openvpn.pid"
+
+# Check if the log file contains a success message
+if grep -q "Initialization Sequence Completed" "$LOG_FILE"; then
+    echo "OpenVPN log indicates a successful connection."
+else
+    echo "OpenVPN log does not indicate a successful connection."
+fi
+
+# Check if the OpenVPN process is running
+if [ -f "$PID_FILE" ]; then
+    OPENVPN_PID=$(cat "$PID_FILE")
+    if ps -p $OPENVPN_PID > /dev/null; then
+        echo "OpenVPN is running with PID $OPENVPN_PID"
+    else
+        echo "OpenVPN is not running"
+    fi
+else
+    echo "PID file not found. OpenVPN might not be running."
+fi
+
+# Check if the tun0 interface is up
+if ip addr show tun0 > /dev/null 2>&1; then
+    echo "tun0 interface is up."
+else
+    echo "tun0 interface is not found."
+fi
+
+# Optionally, check the routing table
+if ip route | grep -q "default via"; then
+    echo "Routing table shows a default route via VPN."
+else
+    echo "Routing table does not show a default route via VPN."
+fi
+

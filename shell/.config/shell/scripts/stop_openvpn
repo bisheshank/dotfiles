@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Path to the PID file
+PID_FILE="$HOME/vpn/openvpn.pid"
+
+# Check if the PID file exists
+if [ ! -f "$PID_FILE" ]; then
+    echo "PID file not found: $PID_FILE"
+    exit 1
+fi
+
+# Read the PID from the file
+OPENVPN_PID=$(cat "$PID_FILE")
+
+# Check if the process is running
+if ps -p $OPENVPN_PID > /dev/null 2>&1; then
+    # Stop the OpenVPN process
+    kill $OPENVPN_PID
+
+    # Remove the PID file
+    rm -f "$PID_FILE"
+
+    echo "OpenVPN process with PID $OPENVPN_PID has been stopped."
+else
+    echo "No running OpenVPN process found with PID $OPENVPN_PID."
+    # Remove the PID file
+    rm -f "$PID_FILE"
+fi
+

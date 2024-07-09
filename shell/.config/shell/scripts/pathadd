@@ -1,0 +1,98 @@
+#!/bin/sh
+
+# Function to print usage information
+print_usage() {
+    cat <<EOF
+Usage: pathadd [options] <directory>
+
+This script safely adds a directory to your PATH.
+
+Options:
+  -f, --front    Add the directory to the front of the PATH
+  -s, --save     Save the change to your .zshrc file
+  -h, --help     Show this help message
+
+Examples:
+  pathadd ~/mydir           # Appends ~/mydir to the end of the PATH
+  pathadd -f ~/mydir        # Prepends ~/mydir to the front of the PATH
+  pathadd -s ~/mydir        # Appends ~/mydir to the end of the PATH and saves to .zshrc
+  pathadd -f -s ~/mydir     # Prepends ~/mydir to the front of the PATH and saves to .zshrc
+
+EOF
+}
+
+# Default behavior: append to end
+POSITION="end"
+SAVE_TO_ZSHRC="no"
+
+# Parse command-line options
+while [ $# -gt 0 ]; do
+    case $1 in
+        -f|--front)
+            POSITION="front"
+            shift
+            ;;
+        -s|--save)
+            SAVE_TO_ZSHRC="yes"
+            shift
+            ;;
+        -h|--help)
+            print_usage
+            exit 0
+            ;;
+        -*)
+            echo "Unknown option: $1"
+            print_usage
+            exit 1
+            ;;
+        *)
+            DIRECTORY=$1
+            shift
+            ;;
+    esac
+done
+
+# Check if the directory was provided
+if [ -z "$DIRECTORY" ]; then
+    echo "Error: No directory specified."
+    print_usage
+    exit 1
+fi
+
+# Check if the directory exists
+if [ ! -d "$DIRECTORY" ]; then
+    echo "Error: Directory '$DIRECTORY' does not exist."
+    exit 1
+fi
+
+# Function to add to PATH safely
+add_to_path() {
+    case ":$PATH:" in
+        *":$DIRECTORY:"*)
+            echo "Directory '$DIRECTORY' is already in the PATH."
+            ;;
+        *)
+            if [ "$POSITION" = "front" ]; then
+                PATH="$DIRECTORY:$PATH"
+            else
+                PATH="$PATH:$DIRECTORY"
+            fi
+            export PATH
+            echo "Directory '$DIRECTORY' added to PATH."
+            ;;
+    esac
+}
+
+# Add the directory to PATH
+add_to_path
+
+# Optionally, save to .zshrc for persistence
+if [ "$SAVE_TO_ZSHRC" = "yes" ]; then
+    if [ "$POSITION" = "front" ]; then
+        echo "export PATH=\"$DIRECTORY:\$PATH\"" >> ~/.zshrc
+    else
+        echo "export PATH=\"\$PATH:$DIRECTORY\"" >> ~/.zshrc
+    fi
+    echo "Directory '$DIRECTORY' added to .zshrc."
+fi
+

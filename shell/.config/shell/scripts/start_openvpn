@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Path to your OpenVPN configuration file
+CONFIG_FILE="$HOME/vpn/bcaryal_browncs.ovpn" 
+
+# Path to the encrypted credentials file
+ENCRYPTED_CREDENTIALS="$HOME/vpn/credentials.txt.gpg"
+
+# Path to the decrypted credentials file (temporary)
+DECRYPTED_CREDENTIALS="$HOME/vpn/credentials.txt"
+
+# Path to the log file
+LOG_FILE="$HOME/vpn/openvpn.log"
+
+# Path to the PID file
+PID_FILE="$HOME/vpn/openvpn.pid"
+
+# Ensure the configuration file exists
+if [ ! -f "$CONFIG_FILE" ]; then
+    echo "OpenVPN configuration file not found: $CONFIG_FILE"
+    exit 1
+fi
+
+# Ensure the encrypted credentials file exists
+if [ ! -f "$ENCRYPTED_CREDENTIALS" ]; then
+    echo "Encrypted credentials file not found: $ENCRYPTED_CREDENTIALS"
+    exit 1
+fi
+
+# Ensure the log directory exists
+LOG_DIR=$(dirname "$LOG_FILE")
+mkdir -p "$LOG_DIR"
+
+# Decrypt the credentials file
+gpg -d "$ENCRYPTED_CREDENTIALS" > "$DECRYPTED_CREDENTIALS"
+
+# Start OpenVPN in the background with sudo and redirect output to the log file
+sudo nohup sh -c "openvpn --config '$CONFIG_FILE' --auth-user-pass '$DECRYPTED_CREDENTIALS' > '$LOG_FILE' 2>&1 & echo \$! > '$PID_FILE'"
+
+# Remove the decrypted credentials file for security
+shred -u "$DECRYPTED_CREDENTIALS"
+
+# Get the PID of the OpenVPN process from the PID file
+OPENVPN_PID=$(cat "$PID_FILE")
+
+# Print the PID and log file location
+echo "OpenVPN started in the background with PID $OPENVPN_PID"
+echo "Logging to $LOG_FILE"
+
