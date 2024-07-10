@@ -39,7 +39,10 @@ generate_up_aliases
 
 
 ## Colorized cat related
-alias cat="bat --paging=never -pp --theme=TwoDark $*"
+# Create alias for bat if installed
+if command -v bat &> /dev/null; then
+  alias cat="bat --paging=never -pp --theme=TwoDark $*"
+fi
 alias search='nvim $(fzf -m --preview="cat {}")'
 
 ## vim to nvim
