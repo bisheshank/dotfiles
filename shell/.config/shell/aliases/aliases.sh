@@ -50,3 +50,7 @@ mkcd() {
     mkdir -p "$1" && cd "$1"
 }
 
+## Python
+alias py='python3'
+alias py2='python2'
+
