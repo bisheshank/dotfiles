@@ -65,7 +65,7 @@ output * bg #77928E solid_color
 # Basics:
 #
     # Lock the screen
-    bindsym Mod1+l exec swaylock -f -c 000000
+    bindsym Mod1+l exec swaylock -f -c 77928E
 
     # Start a terminal
     bindsym $mod+Return exec $term
