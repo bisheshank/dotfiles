@@ -18,12 +18,14 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-# set $menu dmenu_path | wmenu | xargs swaymsg exec --
-set $menu dmenu-wl_run -i
+set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
+### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/pictures/wall-3.jpg fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg #77928E solid_color
+
 #
 # Example configuration:
 #
@@ -35,10 +37,10 @@ output * bg ~/pictures/wall-3.jpg fill
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
+ exec swayidle -w \
+          timeout 300 'swaylock -f -c 77928E' \
+          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          before-sleep 'swaylock -f -c 77928E'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -62,6 +64,9 @@ output * bg ~/pictures/wall-3.jpg fill
 #
 # Basics:
 #
+    # Lock the screen
+    bindsym Mod1+l exec swaylock -f -c 000000
+
     # Start a terminal
     bindsym $mod+Return exec $term
 
@@ -206,7 +211,7 @@ bar {
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-	status_command i3status
+    status_command while ~/.config/sway/status.sh; do sleep 1; done
 
     colors {
         statusline #ffffff
@@ -215,24 +220,23 @@ bar {
     }
 }
 
-# bindsym $mod+Space exec alacritty --class 'launcher' --command bash -c 'compgen -c | sort -u | fzf | xargs -r swaymsg -t command exec' for_window [app_id="^launcher$"] floating enable, border none, resize set width 25 ppt height 20 ppt, move position 0 px 0 px
+# Keyboard
+input "type:keyboard" {
+	xkb_layout us
+	xkb_options caps:swapescape
+}
 
-exec wl-paste -t text --watch clipman store --max-items=60 --histpath="~/.local/share/clijlipman.json"
-bindsym $mod+p exec clipman pick --tool="wofi" --max-items=30 --histpath="~/.local/share/clipman.json"
+# Display
+# output eDP-1 disable
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop disable
 
-# For volume
-bindsym Mod1+Up exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym Mod1+Down exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+# For volume controls
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-# To swap escape and caps
-input "type:keyboard" xkb_options caps:swapescape
-
-# To disable or enable trackpad
-bindsym $mod+Shift+z input type:touchpad events toggle enabled disabled
-
-# Hide mouse cursor after a period of inactivity
-seat seat0 hide_cursor 3000
 
 include /etc/sway/config.d/*
