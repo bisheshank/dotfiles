@@ -117,6 +117,7 @@ source $ZSH/oh-my-zsh.sh
 # Add custom scripts
 export PATH="$PATH:$HOME/.config/shell/scripts"
 export PATH="$PATH:$HOME/.npm-global/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
