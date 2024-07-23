@@ -240,5 +240,6 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Capture the specified screen area to clipboard    
 bindsym Shift+Alt+p exec grim -g "$(slurp)" - | wl-copy
+bindsym Shift+Alt+s exec screenshots.sh
 
 include /etc/sway/config.d/*
