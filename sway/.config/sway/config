@@ -238,6 +238,10 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
+# For brightness
+bindsym --locked XF86MonBrightnessUp exec --no-startup-id light -A 10
+bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
+
 # Capture the specified screen area to clipboard    
 bindsym Shift+Alt+p exec grim -g "$(slurp)" - | wl-copy
 bindsym Shift+Alt+s exec screenshots.sh
