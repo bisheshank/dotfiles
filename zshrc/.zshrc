@@ -126,3 +126,9 @@ eval "$(pyenv init -)"
 
 # Add custom aliases
 source ~/.config/shell/aliases/aliases.sh
+
+# Shell prompt
+if [ -n "$SSH_CONNECTION" ]; then
+	# Prepend SSH indicator to the theme prompt
+	PROMPT="%F{yellow}SSH@%M "$PROMPT
+fi
