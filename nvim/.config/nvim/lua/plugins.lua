@@ -80,6 +80,9 @@ return require('packer').startup(function(use)
   -- Racket support
   use 'benknoble/vim-racket'
 
+  -- Surround 
+  use 'tpope/vim-surround'
+
   -- Custom plugins from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then

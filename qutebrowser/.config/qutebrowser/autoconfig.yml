@@ -6,6 +6,8 @@
 
 config_version: 2
 settings:
+  content.desktop_capture:
+    https://app.zoom.us: true
   content.javascript.clipboard:
     github.com: access
     global: access
