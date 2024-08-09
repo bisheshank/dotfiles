@@ -1,5 +1,9 @@
 # Configuration for Alacritty
 
+import = [
+    "~/.config/alacritty/themes/themes/rose-pine-dawn.toml"
+]
+
 [font]
 size = 20.0
 
@@ -8,3 +12,4 @@ decorations = "Buttonless"
 [window.padding]
 x = 10
 y = 10
+
