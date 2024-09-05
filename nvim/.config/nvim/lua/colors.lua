@@ -1,0 +1,2 @@
+-- Neovim custom theme configuration
+

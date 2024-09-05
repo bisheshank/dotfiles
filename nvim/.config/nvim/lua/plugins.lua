@@ -53,6 +53,7 @@ return require('packer').startup(function(use)
   use 'rebelot/kanagawa.nvim'
   use 'zefei/cake16'
   use 'NLKNguyen/papercolor-theme'
+  use { 'rose-pine/neovim', as = 'rose-pine' }
   use 'mswift42/vim-themes'
 
   -- Copilot

@@ -30,6 +30,9 @@ require('lsp')
 -- Load custom filetype definitions
 require('filetype')
 
+-- Load custom colors
+require('colors')
+
 -- Load plugin configurations
 require('plugins.gitsigns')
 require('plugins.telescope')

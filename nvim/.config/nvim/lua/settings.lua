@@ -28,7 +28,7 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme PaperColor]]
+vim.cmd [[colorscheme rose-pine]]
 vim.o.background = 'light'
 
 -- Set completeopt to have a better completion experience
