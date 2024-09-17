@@ -132,3 +132,4 @@ if [ -n "$SSH_CONNECTION" ]; then
 	# Prepend SSH indicator to the theme prompt
 	PROMPT="%F{yellow}SSH@%M "$PROMPT
 fi
+export PATH=$HOME/.docker/bin:$PATH
