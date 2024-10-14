@@ -40,6 +40,7 @@ require('plugins.treesitter')
 require('plugins.lualine')
 require('plugins.toggleterm')
 require('plugins.vimtex')
+require('plugins.cmp')
 
 if is_bootstrap then
   require('packer').sync()
