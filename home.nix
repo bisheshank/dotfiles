@@ -2,6 +2,7 @@
 	imports = [
 		./git.nix
 		./packages.nix
+		./alacritty.nix
 	];
 
 	home.stateVersion = "25.11";
