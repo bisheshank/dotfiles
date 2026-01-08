@@ -1,7 +1,9 @@
 { pkgs, ... }: {
-  programs.git = {
-    enable = true;
-    userName = "Bisheshank";
-    userEmail = "bisheshank@brown.edu";
-  };
+	programs.git = {
+		enable = true;
+		settings = {
+			user.name = "Bisheshank";
+			user.email = "bisheshank@brown.edu";
+		};
+	};
 }

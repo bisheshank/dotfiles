@@ -1,6 +1,6 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [
-    fzf
-    bat
-  ];
+	home.packages = with pkgs; [
+		fzf 
+		bat
+	];
 }
