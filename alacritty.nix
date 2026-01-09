@@ -2,6 +2,10 @@
 	programs.alacritty = {
 		enable = true;
 		settings = {
+			shell = {
+				program = "${pkgs.tmux}/bin/tmux";
+				args = [ "new-session" "-A" "-s" "main" ];
+			};
 			font.size = 20.0;
 
 			window = {
