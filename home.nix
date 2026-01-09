@@ -3,6 +3,8 @@
 		./git.nix
 		./packages.nix
 		./alacritty.nix
+		./shell.nix
+		./tmux.nix
 	];
 
 	home.stateVersion = "25.11";

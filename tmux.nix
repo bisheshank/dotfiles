@@ -6,29 +6,21 @@
 		newSession = true;
 		escapeTime = 0;
 		secureSocket = false;
-
-		settings = {
-			# Mouse support
-			mouse = "on";
-
-			# Activity monitoring
-			monitor-activity = "on";
-			visual-activity = "on";
-
-			# History limit
-			history-limit = 5000;
-
-			# Pane numbering
-			pane-base-index = 1;
-
-			# Renumber windows
-			renumber-windows = "on";
-
-			# Terminal settings
-			default-terminal = "screen-256color";
-		};
+		mouse = true;
+		terminal = "screen-256color";
+		historyLimit = 5000;
 
 		extraConfig = ''
+			# Activity monitoring
+			setw -g monitor-activity on
+			set -g visual-activity on
+
+			# Pane numbering
+			setw -g pane-base-index 1
+
+			# Renumber windows
+			set -g renumber-windows on
+
 			# Reload config
 			bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
 
