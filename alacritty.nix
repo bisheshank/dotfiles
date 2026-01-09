@@ -3,8 +3,8 @@
 		enable = true;
 		settings = {
 			terminal.shell = {
-				program = "${pkgs.tmux}/bin/tmux";
-				args = [ "new-session" "-A" "-s" "main" ];
+				program = "${pkgs.zsh}/bin/zsh";
+				args = ["-c" "tmux attach-session -t main || tmux new-session -s main; tmux new-window"];
 			};
 			font.size = 20.0;
 

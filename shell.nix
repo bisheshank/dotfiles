@@ -53,6 +53,9 @@
 
 			# Generate aliases on shell start
 			generate_up_aliases
+
+			# tmux is now started directly by alacritty
+			# removed auto-start tmux from zsh to prevent conflicts
 		'';
 	};
 }
